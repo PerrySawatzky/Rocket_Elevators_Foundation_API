@@ -22,6 +22,7 @@ namespace Rocket_Elevators_Foundation_API.Models
         public DbSet<Column> columns { get; set; }
 
         public DbSet<Elevator> elevators { get; set; }
+        public DbSet<Intervention> interventions { get; set; }
         public DbSet<Lead> leads { get; set; }
     }
 }
