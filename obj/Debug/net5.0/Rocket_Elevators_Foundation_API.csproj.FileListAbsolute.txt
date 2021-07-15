@@ -143,3 +143,8 @@
 /Users/officeimac/Rocket_Elevators_Foundation_API/obj/Debug/net5.0/ref/Rocket_Elevators_Foundation_API.dll
 /Users/officeimac/Rocket_Elevators_Foundation_API/obj/Debug/net5.0/Rocket_Elevators_Foundation_API.pdb
 /Users/officeimac/Rocket_Elevators_Foundation_API/obj/Debug/net5.0/Rocket_Elevators_Foundation_API.genruntimeconfig.cache
+/Users/officeimac/Rocket_Elevators_Foundation_API/bin/Debug/net5.0/publish/web.config
+/Users/officeimac/Rocket_Elevators_Foundation_API/bin/Debug/net5.0/publish/appsettings.Development.json
+/Users/officeimac/Rocket_Elevators_Foundation_API/bin/Debug/net5.0/publish/appsettings.json
+/Users/officeimac/Rocket_Elevators_Foundation_API/bin/Debug/net5.0/publish/Rocket_Elevators_Foundation_API.deps.json
+/Users/officeimac/Rocket_Elevators_Foundation_API/bin/Debug/net5.0/publish/Rocket_Elevators_Foundation_API.runtimeconfig.json
