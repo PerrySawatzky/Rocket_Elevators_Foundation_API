@@ -40,10 +40,17 @@ namespace Rocket_Elevators_Foundation_API.Controllers
 
             return intervention;
         }
-
+        // GET: api/interventions/PendingInterventions
+        [HttpGet("PendingInterventions")]
+        public async Task<ActionResult<IEnumerable<Intervention>>> GetTheseInterventions()
+        {
+            var interventionList = await _context.interventions.ToListAsync();
+            var pendingInterventions = interventionList.Where(e => e.status == "Pending" && e.start_of_intervention == null).ToList();
+            return pendingInterventions;
+        }
         // PUT: api/Interventions/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+         [HttpPut("{id}")]
         public async Task<IActionResult> PutIntervention(long id, Intervention intervention)
         {
             if (id != intervention.id)
