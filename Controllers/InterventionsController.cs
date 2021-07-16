@@ -50,7 +50,7 @@ namespace Rocket_Elevators_Foundation_API.Controllers
         }
         // PUT: api/interventions/{id}/InProgress
         [HttpPut("{id}/InProgress")]
-        public async Task<ActionResult<Intervention>> ChangeInterventionStatus([FromRoute]long id)
+        public async Task<ActionResult<Intervention>> ChangeInterventionStatus(long id)
         {
             var intervention = await _context.interventions.FindAsync(id);
             if (intervention == null)
@@ -62,13 +62,13 @@ namespace Rocket_Elevators_Foundation_API.Controllers
                 intervention.status = "InProgress";
                 intervention.start_of_intervention = DateTime.Now;
             }
-                this._context.interventions.Update(intervention);
-                await this._context.SaveChangesAsync();
+                _context.interventions.Update(intervention);
+                await _context.SaveChangesAsync();
             return Content("Intervention " + intervention.id + " is now " + intervention.status + " starting at " + intervention.start_of_intervention);
         }
-        // PUT: api/interventions/{}/Completed
+        // PUT: api/interventions/{id}/Completed
         [HttpPut("{id}/Completed")]
-        public async Task<ActionResult<Intervention>> CompletedInterventionStatus([FromRoute]long id)
+        public async Task<ActionResult<Intervention>> CompletedInterventionStatus(long id)
         {
             var intervention = await _context.interventions.FindAsync(id);
             if (intervention == null)
@@ -80,8 +80,8 @@ namespace Rocket_Elevators_Foundation_API.Controllers
                 intervention.status = "Completed";
                 intervention.end_of_intervention = DateTime.Now;
             }
-                this._context.interventions.Update(intervention);
-                await this._context.SaveChangesAsync();
+                _context.interventions.Update(intervention);
+                await _context.SaveChangesAsync();
             return Content("Intervention " + intervention.id + " is now " + intervention.status + ". Good job! Intervention was marked completed at " + intervention.end_of_intervention + ".");
         }
         // PUT: api/Interventions/5
