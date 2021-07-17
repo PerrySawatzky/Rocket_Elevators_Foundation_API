@@ -1,3 +1,5 @@
+https://whispering-tundra-91467.herokuapp.com/api/
+
 Open terminal and run command:
 ```
 dotnet run
