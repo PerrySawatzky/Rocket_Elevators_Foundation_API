@@ -30,6 +30,12 @@ namespace Rocket_Elevators_Foundation_API
         public void ConfigureServices(IServiceCollection services)
         {
             
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -46,6 +52,7 @@ namespace Rocket_Elevators_Foundation_API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("MyPolicy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -63,6 +70,7 @@ namespace Rocket_Elevators_Foundation_API
             {
                 endpoints.MapControllers();
             });
+            // app.UseMvc();
         }
     }
 }

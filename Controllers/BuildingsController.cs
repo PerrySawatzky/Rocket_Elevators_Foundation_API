@@ -27,6 +27,33 @@ namespace Rocket_Elevators_Foundation_API.Controllers
             return await _context.buildings.ToListAsync();
         }
 
+        // GET: api/Buildings/customer_id/5
+        [HttpGet("customer_email/{customer_id}")]
+        public async Task<ActionResult<Building>> GetUsersBuildingWithEmail(long customer_id)
+        {
+            var buildings = await _context.buildings.FindAsync(customer_id);
+
+            if (buildings == null)
+            {
+                return NotFound();
+            }
+
+            return buildings;
+        }
+        // GET: api/Buildings/customer_id/5
+        [HttpGet("customer_id/{customer_id}")]
+        public async Task<ActionResult<Building>> GetUsersBuilding(long customer_id)
+        {
+            var buildings = await _context.buildings.FindAsync(customer_id);
+
+            if (buildings == null)
+            {
+                return NotFound();
+            }
+
+            return buildings;
+        }
+        
         // GET: api/Buildings/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Building>> GetBuilding(long id)
