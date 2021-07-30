@@ -32,7 +32,8 @@ namespace Rocket_Elevators_Foundation_API.Controllers
         public async Task<ActionResult<Building>> GetUsersBuildingWithEmail(long customer_id)
         {
             var buildings = await _context.buildings.FindAsync(customer_id);
-
+            // IEnumerable<Building> customersBuildings;
+            // customersBuildings = buildings.Where(e => e.status != "active");
             if (buildings == null)
             {
                 return NotFound();
