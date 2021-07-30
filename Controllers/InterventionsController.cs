@@ -118,7 +118,7 @@ namespace Rocket_Elevators_Foundation_API.Controllers
         // POST: api/Interventions
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Intervention>> PostIntervention(Intervention intervention)
+        public async Task<ActionResult<Intervention>> PostIntervention([FromForm]Intervention intervention)
         {
             _context.interventions.Add(intervention);
             await _context.SaveChangesAsync();

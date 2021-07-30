@@ -30,7 +30,7 @@ namespace Rocket_Elevators_Foundation_API
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            services.AddCors(o => o.AddPolicy(name:"MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
