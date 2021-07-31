@@ -40,7 +40,27 @@ namespace Rocket_Elevators_Foundation_API.Controllers
 
             return customer;
         }
-
+        [HttpPut]
+        public async Task<ActionResult<IEnumerable<Customer>>> PutCustomerItem(Customer customer)
+        {
+            var customerUpdate = await _context.customers.Where(c => c.company_contact_email == customer.company_contact_email).FirstOrDefaultAsync();
+            Console.WriteLine(customerUpdate);
+            
+            customerUpdate.company_name = customer.company_name;
+            customerUpdate.company_contact_full_name = customer.company_contact_full_name;
+            customerUpdate.company_contact_phone = customer.company_contact_phone;
+            customerUpdate.company_contact_email = customer.company_contact_email;
+            customerUpdate.company_description = customer.company_description;
+            customerUpdate.service_tech_authority_full_name = customer.service_tech_authority_full_name;
+            customerUpdate.technical_authority_for_service_phone = customer.technical_authority_for_service_phone;
+            customerUpdate.technical_manager_email_for_service = customer.technical_manager_email_for_service;
+            if (customerUpdate == null)
+            {
+                return NotFound();
+            }
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
