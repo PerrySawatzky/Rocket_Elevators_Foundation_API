@@ -15,7 +15,8 @@ namespace Rocket_Elevators_Foundation_API.Models
         public string dept_in_charge_of_elevators { get; set; }
         public string message { get; set; }
         public byte[] attached_file { get; set; }
-        public DateTime date_of_contact_request { get; set; }
+        #nullable enable
+        public DateTime? date_of_contact_request { get; set; }
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }
     }

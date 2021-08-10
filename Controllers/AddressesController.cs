@@ -27,6 +27,18 @@ namespace Rocket_Elevators_Foundation_API.Controllers
             return await _context.addresses.ToListAsync();
         }
 
+        // GET: api/Addresses/batteriesInCities
+        [HttpGet("batteriesInCities")]
+        public async Task<List<int>> batteriesInCities()
+        {
+            var stringOfAddresses = await _context.addresses.Select(c => c.city).Distinct().ToListAsync();
+            var numOfBatteries = await _context.batteries.ToListAsync();
+            var arrayAPI = new List<int>();
+            arrayAPI.Add(numOfBatteries.Count);
+            arrayAPI.Add(stringOfAddresses.Count);
+            return arrayAPI;
+        }
+
         // GET: api/Addresses/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Address>> GetAddress(long id)

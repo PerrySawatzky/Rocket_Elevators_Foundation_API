@@ -26,5 +26,6 @@ namespace Rocket_Elevators_Foundation_API.Models
         public DbSet<Address> addresses { get; set; }
         public DbSet<User> users { get; set; }
         public DbSet<Lead> leads { get; set; }
+        public DbSet<Quote> quotes { get; set; }
     }
 }

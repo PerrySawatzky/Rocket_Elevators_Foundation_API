@@ -26,7 +26,14 @@ namespace Rocket_Elevators_Foundation_API.Controllers
         {
             return await _context.leads.ToListAsync();
         }
-
+         // GET: api/Leads/Count
+        [HttpGet("Count")]
+        public async Task<int> leadsCount()
+        {
+            var leads = await _context.leads.ToListAsync();
+            return leads.Count;
+        }
+        
         // GET: api/Leads/5
         [HttpGet("GetLead/{id}")]
         public async Task<ActionResult<Lead>> GetLead(long id)
@@ -41,39 +48,39 @@ namespace Rocket_Elevators_Foundation_API.Controllers
             return lead;
         }
 
-        [HttpGet("{Get30DayLeads}")]
-        public async Task<ActionResult<IEnumerable<Lead>>> Get30DayLeads()
-        {
-            var leadList = await _context.leads.ToListAsync();
-            var customerList = await _context.customers.ToListAsync();
-            List<Lead> lead30DayList = new List<Lead>();
-            foreach (Lead leads in leadList)
-            {
-                DateTime dateNow =  DateTime.Now; 
-                TimeSpan timeSpan = dateNow.Subtract(leads.date_of_contact_request);
-                int result = (int) timeSpan.TotalDays;
-                if (result <= 30)
-                {
-                    bool isaCompany = false;
-                    foreach (Customer customers in customerList)
-                    {
-                        if (customers.company_name == leads.company_name)
-                        {
-                            isaCompany = true;
-                        }
-                    }
-                    if (!isaCompany)
-                    {
-                        lead30DayList.Add(leads);
-                    }
-                }
-            }
-            if(lead30DayList == null)
-            {
-                NotFound();
-            }
-            return lead30DayList;
-        }
+        // [HttpGet("{Get30DayLeads}")]
+        // public async Task<ActionResult<IEnumerable<Lead>>> Get30DayLeads()
+        // {
+        //     var leadList = await _context.leads.ToListAsync();
+        //     var customerList = await _context.customers.ToListAsync();
+        //     List<Lead> lead30DayList = new List<Lead>();
+        //     foreach (Lead leads in leadList)
+        //     {
+        //         DateTime dateNow =  DateTime.Now; 
+        //         TimeSpan timeSpan = dateNow.Subtract(leads.date_of_contact_request);
+        //         int result = (int) timeSpan.TotalDays;
+        //         if (result <= 30)
+        //         {
+        //             bool isaCompany = false;
+        //             foreach (Customer customers in customerList)
+        //             {
+        //                 if (customers.company_name == leads.company_name)
+        //                 {
+        //                     isaCompany = true;
+        //                 }
+        //             }
+        //             if (!isaCompany)
+        //             {
+        //                 lead30DayList.Add(leads);
+        //             }
+        //         }
+        //     }
+        //     if(lead30DayList == null)
+        //     {
+        //         NotFound();
+        //     }
+        //     return lead30DayList;
+        // }
 
         // PUT: api/Leads/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

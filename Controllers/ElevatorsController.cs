@@ -26,6 +26,7 @@ namespace Rocket_Elevators_Foundation_API.Controllers
         {
             return await _context.elevators.ToListAsync();
         }
+       
 
         // GET: api/Elevators/5
         [HttpGet("{id}")]
@@ -40,13 +41,41 @@ namespace Rocket_Elevators_Foundation_API.Controllers
 
             return elevator;
         }
-
-        [HttpGet("DisplayAllInoperational")]
-        public async Task<ActionResult<IEnumerable<Elevator>>> GetTheseElevators()
+        
+        // GET: api/Elevators/elevatorBuildingCustomer
+        [HttpGet("elevatorBuildingCustomer")]
+        public async Task<List<int>> elevatorBuildingCustomer()
+        {
+            var numOfElevators = await _context.elevators.ToListAsync();
+            var numOfBuildings = await _context.buildings.ToListAsync();
+            var numOfCustomers = await _context.customers.ToListAsync();
+            var arrayAPI = new List<int>();
+            arrayAPI.Add(numOfElevators.Count);
+            arrayAPI.Add(numOfBuildings.Count);
+            arrayAPI.Add(numOfCustomers.Count);
+            return arrayAPI;
+        }
+        // GET: api/Elevators/status/{id}
+        [HttpGet("status/{id}")]
+        public async Task<string> status(long id)
+        {
+            var elevator = await _context.elevators.FindAsync(id);
+            if (elevator == null)
+            {
+                return "Error 404; Elevator not found.";
+            }
+            else {
+                var elevatorStatus = elevator.status;
+                return elevatorStatus.ToString();
+            }
+        }
+        // GET: api/Elevators/offline
+        [HttpGet("offline")]
+        public async Task<int> offline()
         {
             var elevatorList = await _context.elevators.ToListAsync();
-            var inoperationalElevators = elevatorList.Where(e => e.status != "active").ToList();
-            return inoperationalElevators;
+            var offline = elevatorList.Where(e => e.status != "online").ToList();
+            return offline.Count;
         }
 
         // PUT: api/Elevators/5
