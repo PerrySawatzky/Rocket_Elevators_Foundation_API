@@ -29,31 +29,31 @@ namespace Rocket_Elevators_Foundation_API.Controllers
 
         // GET: api/Addresses/Alexa
         [HttpGet("Alexa")]
-        public async Task<List<string>> Alexa()
+        public async Task<List<int>> Alexa()
         {
-            var arrayAPI = new List<string>();
+            var arrayAPI = new List<int>();
             //There are currently XXX elevators deployed in the XXX buildings of your XXX customers
             var numOfElevators = await _context.elevators.ToListAsync();
             var numOfBuildings = await _context.buildings.ToListAsync();
             var numOfCustomers = await _context.customers.ToListAsync();
-            arrayAPI.Add(numOfElevators.Count.ToString());
-            arrayAPI.Add(numOfBuildings.Count.ToString());
-            arrayAPI.Add(numOfCustomers.Count.ToString());
+            arrayAPI.Add(numOfElevators.Count);
+            arrayAPI.Add(numOfBuildings.Count);
+            arrayAPI.Add(numOfCustomers.Count);
             //Currently, XXX elevators are not in Running Status and are being serviced
             var elevatorList = await _context.elevators.ToListAsync();
             var offline = elevatorList.Where(e => e.status != "online").ToList();
-            arrayAPI.Add(offline.Count.ToString());
+            arrayAPI.Add(offline.Count);
             //XXX Batteries are deployed across XXX cities
             var numOfAddresses = await _context.addresses.Select(c => c.city).Distinct().ToListAsync();
             var numOfBatteries = await _context.batteries.ToListAsync();
-            arrayAPI.Add(numOfBatteries.Count.ToString());
-            arrayAPI.Add(numOfAddresses.Count.ToString());
+            arrayAPI.Add(numOfBatteries.Count);
+            arrayAPI.Add(numOfAddresses.Count);
             //On another note you currently have XXX quotes awaiting processing
             var numOfQuotes = await _context.quotes.ToListAsync();
-            arrayAPI.Add(numOfQuotes.Count.ToString());
+            arrayAPI.Add(numOfQuotes.Count);
             //You also have XXX leads in your contact requests
             var numOfLeads = await _context.leads.ToListAsync();
-            arrayAPI.Add(numOfLeads.Count.ToString());
+            arrayAPI.Add(numOfLeads.Count);
             return arrayAPI;
         }
 
