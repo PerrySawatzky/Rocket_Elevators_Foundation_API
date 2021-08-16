@@ -41,6 +41,21 @@ namespace Rocket_Elevators_Foundation_API.Controllers
 
             return elevator;
         }
+
+         // GET: api/Elevators/notInOperation
+        [HttpGet("notInOperation")]
+        public async Task<ActionResult<IEnumerable<Elevator>>> notInOperation()
+        {
+            var elevatorList = await _context.elevators.ToListAsync();
+            var offlineElevator = elevatorList.Where(e => e.status != "online").ToList();
+
+            if (offlineElevator == null)
+            {
+                return NotFound();
+            }
+
+            return offlineElevator;
+        }
         
         // GET: api/Elevators/elevatorBuildingCustomer
         [HttpGet("elevatorBuildingCustomer")]
@@ -89,7 +104,7 @@ namespace Rocket_Elevators_Foundation_API.Controllers
                 return NotFound();
             }
             
-            if (elevators.status == "active")
+            if (elevators.status == "online")
             {
                 elevators.status = "offline";
                 _context.elevators.Update(elevators);
@@ -97,7 +112,7 @@ namespace Rocket_Elevators_Foundation_API.Controllers
 
             else if (elevators.status == "offline")
             {
-                elevators.status = "active";
+                elevators.status = "online";
                 _context.elevators.Update(elevators);
             }
 
