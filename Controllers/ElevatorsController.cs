@@ -47,7 +47,7 @@ namespace Rocket_Elevators_Foundation_API.Controllers
         public async Task<ActionResult<IEnumerable<Elevator>>> notInOperation()
         {
             var elevatorList = await _context.elevators.ToListAsync();
-            var offlineElevator = elevatorList.Where(e => e.status != "online").ToList();
+            var offlineElevator = elevatorList.Where(e => e.status != "online" && e.serial_number != null).ToList();
 
             if (offlineElevator == null)
             {
