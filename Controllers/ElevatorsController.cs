@@ -110,7 +110,7 @@ namespace Rocket_Elevators_Foundation_API.Controllers
                 _context.elevators.Update(elevators);
             }
 
-            else if (elevators.status == "offline")
+            else
             {
                 elevators.status = "online";
                 _context.elevators.Update(elevators);
